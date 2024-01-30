@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap-5.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/bootstrap-icons/bootstrap-icons.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/animate.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/magnific-popup.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/aos.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/ionicons.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/jquery.timepicker.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/flaticon.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/icomoon.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/style.css">
+	<style>
+		body {
+			background-color: rgb(18, 18, 18);
+			margin: 0;
+		}
+
+		.cardArea {
+			background-color: rgb(249, 249, 249);
+			padding-top: 80px;
+			/* Adjust the value based on your header height */
+		}
+
+		.navbar {
+			background-color: #3B3544;
+		}
+
+		.navbar-brand {
+			color: #FFF;
+		}
+
+		.navbar-nav .nav-link {
+			color: #FFF;
+		}
+
+		.nav_bars {
+			padding: 10px;
+			border: 1px solid;
+			color: #FFF;
+		}
+
+		.cardRage {
+			z-index: 1;
+			/* You can adjust this value based on your needs */
+		}
+	</style>
+
+</head>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div sec:authorize="hasRole('ADMIN')" class="cardArea">
+		<div class="cardRage">
+			<div class="border-top border-secondary">
+				<form class="row g-3 ms-4 py-4" th:action="@{/memberadd}">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-primary mb-3">Add
+							member</button>
+					</div>
+				</form>
+			</div>
+			<div class="h1 mb-4" style="text-align: center;">View members</div>
+
+			<div class="alert alert-success" role="alert" th:if="${success}" th:text="${success}"></div>
+
+			<table class="table table-secondary table-hover mb-0">
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Username</th>
+					<th>Password</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="member:${memberList}">
+					<td th:text="${member.id}"></td>
+					<td th:text="${member.name}"></td>
+					<td><a th:href="@{/member{id}(id=${member.id})}" th:text="${member.username}"></a></td>
+					<td th:text="${member.password}"></td>
+					<td th:text="${member.email}"></td>
+					<td th:text="${member.role}"></td>
+					<td><a th:href="@{/memberedit{id}(id=${member.id})}">edit</a> <a
+							th:href="@{/member/delete/{id}(id=${member.id})}">Delete</a></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+
+</html>

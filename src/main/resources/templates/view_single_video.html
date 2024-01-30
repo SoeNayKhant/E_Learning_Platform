@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap-5.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/bootstrap-icons/bootstrap-icons.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/animate.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/magnific-popup.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/aos.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/ionicons.min.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/jquery.timepicker.css">
+
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/flaticon.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/icomoon.css">
+	<link rel="stylesheet" href="../Bootstrap_Files/CustomCSS/style.css">
+	<style>
+		body {
+			background-color: rgb(18, 18, 18);
+			margin: 0;
+		}
+
+		.cardArea {
+			background-color: rgb(48, 48, 48);
+			padding-top: 83px;
+			/* Adjust the value based on your header height */
+		}
+
+		.navbar {
+			background-color: #3B3544;
+		}
+
+		.navbar-brand {
+			color: #FFF;
+		}
+
+		.navbar-nav .nav-link {
+			color: #FFF;
+		}
+
+		.nav_bars {
+			padding: 10px;
+			border: 1px solid;
+			color: #FFF;
+		}
+
+		.card {
+			z-index: 1;
+			/* You can adjust this value based on your needs */
+		}
+	</style>
+
+
+</head>
+
+<body>
+	<div th:replace="fragments/header"></div>
+	<div class="d-flex cardArea ms-0">
+		<!--		<h1 th:text="${video.name}"></h1>
+		<h5 th:text="${video.course.name}"></h5>-->
+		<!--<video alt="video" th:src="@{uploads/videos/{id}/{vidName}(id=${video.id},vidName=${video.vidName})}" width="70"
+			height="70"></video>-->
+		<!--<video alt="video" th:src="@{'/uploads/videos/' + ${video.id} + '/' + ${video.vidName}}" width="70"
+			height="70"></video>-->
+		<div class="border border-3"><video controls alt="video"
+				th:src="@{'/uploads/videos/' + ${video.id} + '/' + ${video.vidName}}" width="1000px"
+				height="100%"></video></div>
+		<div class="container-fluid border border-3">
+			<h1 class="text-light" th:text="${video.name}"></h1>
+			<hr class="border border-success border-3 opacity-75">
+			<h5 class="text-light" th:text="${video.course.name}"></h5>
+			<h5 class="text-light" th:text="${video.description}"></h5>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery-migrate-3.0.1.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/popper.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/bootstrap.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.easing.1.3.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.waypoints.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.stellar.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/owl.carousel.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.magnific-popup.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/aos.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.animateNumber.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/bootstrap-datepicker.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/jquery.timepicker.min.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/scrollax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="../Bootstrap_Files/CustomJS/google-map.js"></script>
+	<script src="../Bootstrap_Files/CustomJS/main.js"></script>
+	<script type="text/javascript" src="bootstrap-5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

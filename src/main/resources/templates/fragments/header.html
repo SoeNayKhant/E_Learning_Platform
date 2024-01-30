@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Insert title here</title>
+	<style>
+		.side-menu a:hover {
+			color: white;
+			font-weight: �bolder;
+		}
+
+		body {
+			background-image: url("/Images/bg_4.jpg");
+		}
+
+		.navbar {
+			background-color: rgb(26, 57, 28);
+		}
+
+		.navbar-brand {
+			color: #FFF;
+		}
+
+		.navbar-nav .nav-link {
+			color: #FFF;
+		}
+
+		.nav_bars {
+			padding: 10px;
+			border: 1px solid;
+			color: #FFF;
+		}
+
+		header {
+			position: fixed;
+			background-color: rgb(26, 57, 28);
+			z-index: 1000;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+
+	<header style="position: fixed; background-color: rgb(26, 57, 28); z-index: 1000; width: 100%;"
+		class="container-fluid mt-0">
+		<nav class="navbar navbar-expand-lg">
+			<a class="navbar-brand" th:href="@{/}">
+				<h1 class="text-light ms-0">NET<span>EDUCATOR</span></h1>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<!-- ... search box start ... -->
+				<form th:action="@{/searchedcourse}" method="get" role="search">
+					<div class="input-group border border-2 border-dark rounded-5 mb-2">
+						<input type="search" name="search" class="form-control-sm bg-success-subtle rounded-5"
+							placeholder="Type here to search . . ." aria-label="Search"
+							aria-describedby="button-addon2">
+						<button class="btn text-light" type="submit" id="button-addon2">Search</button>
+					</div>
+				</form>
+				<!-- ... search box end ... -->
+
+
+				<ul class="navbar-nav mb-2">
+					<li class="nav-item"><a class="nav-link" href="/courses">Courses</a>
+					</li>
+					<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link" href="/videos">Videos</a>
+						</lisec:authorize="isAuthenticated()">
+					<li sec:authorize="hasRole('ADMIN')" class="nav-item">
+						<a class="nav-link" href="/histories">Histories</a>
+					</li>
+					<li sec:authorize="hasRole('USER')" class="nav-item"><a class="nav-link"
+							href="/personalhistories">Histories</a>
+					</li>
+					<li sec:authorize="hasRole('USER')" class="nav-item">
+						<div class="dropdown side-menu">
+							<a class="nav-link btn btn-secondary dropdown-toggle" href="" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">Categories
+							</a>
+							<ul class="dropdown-menu bg-success">
+								<li th:each="category:${categoryList}"><a class="dropdown-item text-dark"
+										th:href="@{/categories{id}(id=${category.id})}" th:text="${category.name}">
+									</a></li>
+							</ul>
+						</div>
+					</li>
+					<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link"
+							th:href="@{/categories}">Categories</a></li>
+					<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link"
+							th:href="@{/members}">Members</a></li>
+					<li sec:authorize="hasRole('ADMIN')" class="nav-item"><a class="nav-link"
+							th:href="@{/feedbacks}">Feedbacks</a></li>
+					<li sec:authorize="!hasRole('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/cart}"><svg
+								xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 576 512">
+								<style>
+									svg {
+										fill: #c5da25
+									}
+								</style>
+								<path
+									d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+							</svg>
+							<span sec:authorize="hasRole('USER')"
+								class=" translate-middle badge rounded-pill bg-success text-light" th:if="${count!=0}"
+								th:text="${count}"> <span class="visually-hidden">unread
+									messages</span>
+							</span></a></li>
+					<!--<li class="nav-item"><a class="nav-link" th:href="@{/service}">Services</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/about}">About
+								Us</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact Us</a></li>-->
+				</ul>
+			</div>
+
+			<div class="dropdown side-menu text-end mr-5 " sec:authorize="isAuthenticated()">
+				<div class="row">
+					<div class="col-lg-8">
+						<p class="text-center text-light mt-3">
+							Hello <span sec:authentication="principal.member.name"></span>!
+						</p>
+					</div>
+					<div class="col-lg-4">
+						<a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle mt-2"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							<img alt="mdo"
+								th:src="@{uploads/members/{id}/{photoName}(id=${navmember.id},photoName=${navmember.photoName})}"
+								width="32" height="32" class="rounded-circle">
+						</a>
+					</div>
+				</div>
+
+				<ul class="dropdown-menu bg-success text-small">
+					<li><a class="dropdown-item text-danger" href="" sec:authentication="principal.member.name"></a>
+					</li>
+					<li sec:authorize="hasRole('ADMIN')"><a class="dropdown-item text-danger" href="#"
+							sec:authentication="principal.member.role"></a></li>
+					<li sec:authorize="hasRole('USER')"><a class="dropdown-item text-light" href="/enrolledcourses">My
+							Courses</a></li>
+					<li>
+						<hr class="dropdown-divider">
+					</li>
+					<li class="dropdown-item">
+						<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+							<button type="submit" class="btn btn-outlinne-light btn-warning me-2">Logout</button>
+						</form>
+					</li>
+				</ul>
+			</div>
+			<ul class="navbar-nav text-end mr-5 mb-2">
+				<li><a sec:authorize="!isAuthenticated()" th:href="@{/login}"
+						class="btn btn-outlinne-light btn-warning me-2">Log In</a></li>
+				<li><a sec:authorize="!isAuthenticated()" th:href="@{/memberadd}" class="btn btn-warning">Sign
+						Up</a></li>
+			</ul>
+		</nav>
+	</header>
+</body>
+
+</html>
